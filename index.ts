@@ -23,21 +23,27 @@ export function EtherTypeAssertion(typc: typeChecker, value: any, fn: postFuncio
 export function isPublicKey(value: any): boolean {
     return isHexString(value, 64);
 }
+
 export function isPrivateKey(value: any): boolean {
     return isHexString(value, 32);
 }
+
 export function isBlockHash(value: any): boolean {
     return isHexString(value, 32);
 }
+
 export function isBlockHashOrBlockTag(value: any): boolean {
     return isHexString(value, 32);
 }
+
 export function isFromBlockOrBlockHash(value: any): boolean {
     return isHexString(value, 32);
 }
+
 export function isAddress(value: any): boolean {
     return isHexString(value, 20);
 }
+
 export function isVerifyingContract(value: any): boolean {
     return isHexString(value, 20);
 }
