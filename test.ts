@@ -35,6 +35,7 @@ function isAddress_Test() {
     if (isAddress(address3)) 
         throw ErrExpectFalse(testname, address3);
 }
+
 function isBlockHash_Test() {
     let testname = "isBlockHash";
     let hash1 = "0x60fc96a24c2856d926d251b4fe883cb98749e1a20b35783b994704b9c6e0e970";
@@ -47,8 +48,8 @@ function isBlockHash_Test() {
         throw ErrExpectFalse(testname, hash2);
     if (isBlockHash(hash3)) 
         throw ErrExpectFalse(testname, hash3);
-
 }
+
 function isPrivateKey_Test() {
     let testname = "isPrivateKey";
     let privKey1 = "0x0123456789012345678901234567890123456789012345678901234567890123";
@@ -62,6 +63,7 @@ function isPrivateKey_Test() {
     if (isPrivateKey(privKey3)) 
         throw ErrExpectFalse(testname, privKey3);
 }
+
 function isPublicKey_Test() {
     let testname = "isPublicKey";
     // TODO
