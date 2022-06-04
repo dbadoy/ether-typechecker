@@ -7,19 +7,19 @@ interface postFuncion {
     (): void;
 }
 
-function isHexString(value: string, length: number): boolean {
-    if (!value.match(/^0x[0-9A-Fa-f]*$/)) {
+export function EtherTypeAssertion(typc: typeChecker, value: string, fn: postFuncion) {
+    if (!typc(value))
+        fn();
+}
+
+export function isHexString(value: string, length: number): boolean {
+    if (!/^0x[0-9A-Fa-f]*$/.test(value)) {
         return false
     }
     if (length && value.length !== 2 + 2 * length) {
         return false;
     }
     return true;
-}
-
-export function EtherTypeAssertion(typc: typeChecker, value: string, fn: postFuncion) {
-    if (!typc(value)) 
-        fn();
 }
 
 export function isPublicKey(value: string): boolean {
@@ -39,6 +39,10 @@ export function isBlockHashOrBlockTag(value: string): boolean {
 }
 
 export function isFromBlockOrBlockHash(value: string): boolean {
+    return isHexString(value, 32);
+}
+
+export function isTopic(value: string): boolean {
     return isHexString(value, 32);
 }
 

@@ -6,9 +6,6 @@ import {
     isPublicKey,
 } from './index';
 
-const ErrExpectTrue = (prefix: string, input: string) => { throw new Error(`[${prefix} - input : ${input}] it's expect true, but returns false.`); }
-const ErrExpectFalse = (prefix: string, input: string) => { throw new Error(`[${prefix} - input : ${input}] it's expect false, but returns true.`); }
-
 function main() {
     try {
         isAddress_Test();
@@ -24,53 +21,61 @@ main();
 
 function isAddress_Test() {
     let testname = "isAddress";
-    let address1 = "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C";
-    let address2 = "0x564369022fDE19d63c6d72a23b48Ad4e20CE2";
-    let address3 = "ethereum.org";
+    let testset = [
+        {value: "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C", expect: true},
+        {value: "0x564369022fDE19d63c6d72a23b48Ad4e20CE2", expect: false},
+        {value: "ethereum.org", expect: false},
+    ];
 
-    if (!isAddress(address1)) 
-        throw ErrExpectTrue(testname, address1);
-    if (isAddress(address2)) 
-        throw ErrExpectFalse(testname, address2);
-    if (isAddress(address3)) 
-        throw ErrExpectFalse(testname, address3);
+    for (const elem of testset) {
+        if(elem.expect != isAddress(elem.value)) {
+            throw new Error(`${testname} | input: ${elem.value} | expect : ${elem.expect} | result : ${!elem.expect}`);
+        }
+    }
 }
 
 function isBlockHash_Test() {
     let testname = "isBlockHash";
-    let hash1 = "0x60fc96a24c2856d926d251b4fe883cb98749e1a20b35783b994704b9c6e0e970";
-    let hash2 = "0x60fc96a24c2856d926d251b4fe883cb98749e1a20b35783b994704b9";
-    let hash3 = "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C"
-    
-    if (!isBlockHash(hash1))
-        throw ErrExpectTrue(testname, hash1);
-    if (isBlockHash(hash2)) 
-        throw ErrExpectFalse(testname, hash2);
-    if (isBlockHash(hash3)) 
-        throw ErrExpectFalse(testname, hash3);
+    let testset = [
+        {value: "0x60fc96a24c2856d926d251b4fe883cb98749e1a20b35783b994704b9c6e0e970", expect: true},
+        {value: "0x60fc96a24c2856d926d251b4fe883cb98749e1a20b35783b994704b9", expect: false},
+        {value: "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C", expect: false},
+    ];
+
+    for (const elem of testset) {
+        if(elem.expect != isBlockHash(elem.value)) {
+            throw new Error(`${testname} | input: ${elem.value} | expect : ${elem.expect} | result : ${!elem.expect}`);
+        }
+    }
 }
 
 function isPrivateKey_Test() {
     let testname = "isPrivateKey";
-    let privKey1 = "0x0123456789012345678901234567890123456789012345678901234567890123";
-    let privKey2 = "0x012345678901234567890123456789012345678901234567890123456";
-    let privKey3 = "ethereum.org";
+    let testset = [
+        {value: "0x0123456789012345678901234567890123456789012345678901234567890123", expect: true},
+        {value: "0x012345678901234567890123456789012345678901234567890123456", expect: false},
+        {value: "ethereum.org", expect: false},
+    ];
 
-    if (!isPrivateKey(privKey1))
-        throw ErrExpectTrue(testname, privKey1);
-    if (isPrivateKey(privKey2)) 
-        throw ErrExpectFalse(testname, privKey2);
-    if (isPrivateKey(privKey3)) 
-        throw ErrExpectFalse(testname, privKey3);
+    for (const elem of testset) {
+        if(elem.expect != isPrivateKey(elem.value)) {
+            throw new Error(`${testname} | input: ${elem.value} | expect : ${elem.expect} | result : ${!elem.expect}`);
+        }
+    }
 }
 
 function isPublicKey_Test() {
     let testname = "isPublicKey";
     // TODO
-    let pubKey1 = "0x04e68acfc0253a620dff706b0a1b1f1f5833ea3beb3bde2250d5f271f3563606672ebc45e0b7ea2e816ecb70ca03137b1c9476eec63d4632e990020b7b6fba39";
+    let testset = [
+        {value: "0x04e68acfc0253a620dff706b0a1b1f1f5833ea3beb3bde2250d5f271f3563606672ebc45e0b7ea2e816ecb70ca03137b1c9476eec63d4632e990020b7b6fba39", expect: true},
+    ]
 
-    if (!isPublicKey(pubKey1)) 
-        throw ErrExpectTrue(testname, pubKey1);
+    for (const elem of testset) {
+        if(elem.expect != isPublicKey(elem.value)) {
+            throw new Error(`${testname} | input: ${elem.value} | expect : ${elem.expect} | result : ${!elem.expect}`);
+        }
+    }
 }
 
 function typeAssertion_Test() {
@@ -83,7 +88,7 @@ function typeAssertion_Test() {
     // type 2
     let postFunc1 = () => { console.log('is not address.'); }
     EtherTypeAssertion(isAddress, address1, postFunc1);
-    
+
     let postFunc2 = () => { throw new Error("is not address."); }
-    EtherTypeAssertion(isAddress, address2, postFunc2)
+    EtherTypeAssertion(isAddress, address2, postFunc2);
 }
