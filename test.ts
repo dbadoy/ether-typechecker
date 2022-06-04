@@ -74,12 +74,16 @@ function isPublicKey_Test() {
 }
 
 function typeAssertion_Test() {
-    let address1 = "0x564369022fDE19d63c6d72a23b4d4e20CE235C";
+    let address1 = "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C";
+    let address2 = "0x564369022fDE19d63c6d72a23b48Ad4e20";
 
     // type 1
-    EtherTypeAssertion(isAddress, address1, ()=>{throw new Error("is not address.");})
+    EtherTypeAssertion(isAddress, address1, ()=> { throw new Error("is not address.");} )
 
     // type 2
-    let afterWork = () => { console.log('is not address.'); }
-    EtherTypeAssertion(isAddress, address1, afterWork);
+    let postFunc1 = () => { console.log('is not address.'); }
+    EtherTypeAssertion(isAddress, address1, postFunc1);
+    
+    let postFunc2 = () => { throw new Error("is not address."); }
+    EtherTypeAssertion(isAddress, address2, postFunc2)
 }
