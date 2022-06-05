@@ -15,6 +15,10 @@ EtherTypeAssertion(typc: typeChecker, value: string, postFnOrErrorMesg: postFunc
   interface typeChecker {
     (value: string): boolean;
   }
+  
+  interface postFuncion {
+    (): void;
+  }
 */
 
 // typeCheckers
