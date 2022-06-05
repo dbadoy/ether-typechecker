@@ -7,9 +7,20 @@ interface postFuncion {
     (): void;
 }
 
-export function EtherTypeAssertion(typc: typeChecker, value: string, fn: postFuncion) {
-    if (!typc(value))
-        fn();
+export const ThrowError = (mesg: string) => {
+    throw new Error(mesg);
+}
+
+export function EtherTypeAssertion(typc: typeChecker, value: string, postFnOrErrorMesg: postFuncion | string) {
+    if (!typc(value)) {
+        if (postFnOrErrorMesg === 'string') {
+            let errorMesg: string = postFnOrErrorMesg;
+            ThrowError(errorMesg);
+        } else {
+            let postFn: any = postFnOrErrorMesg;
+            postFn();
+        }
+    }
 }
 
 export function isHexString(value: string, length: number): boolean {
