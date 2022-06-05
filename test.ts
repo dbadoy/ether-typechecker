@@ -1,6 +1,5 @@
 import {
     EtherTypeAssertion,
-    ThrowError,
     isAddress,
     isBlockHash,
     isPrivateKey,
@@ -97,8 +96,5 @@ function typeAssertion_Test() {
     // type3
     // throw errors with third parameter.
     EtherTypeAssertion(isAddress, address2, "is not address.");
-
-    // type4
-    // use imported ThrowError. it's throw errors with parameter.
-    EtherTypeAssertion(isAddress, address2, ThrowError("is not address."));
 }
+
