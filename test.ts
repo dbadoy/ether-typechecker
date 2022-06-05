@@ -66,9 +66,9 @@ function isPrivateKey_Test() {
 
 function isPublicKey_Test() {
     let testname = "isPublicKey";
-    // TODO
+
     let testset = [
-        {value: "0x04e68acfc0253a620dff706b0a1b1f1f5833ea3beb3bde2250d5f271f3563606672ebc45e0b7ea2e816ecb70ca03137b1c9476eec63d4632e990020b7b6fba39", expect: true},
+        {value: "0x1e7bcc70c72770dbb72fea022e8a6d07f814d2ebe4de9ae3f7af75bf706902a7b73ff919898c836396a6b0c96812c3213b99372050853bd1678da0ead14487d7", expect: true},
     ];
 
     for (const elem of testset) {
@@ -80,7 +80,7 @@ function isPublicKey_Test() {
 
 function typeAssertion_Test() {
     let address1 = "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C";
-    let address2 = "0x564369022fDE19d63c6d72a23b48Ad4e20";
+    let address2 = "0x564369022fDE19d63c6d72a23b48Ad4e20CE235C";
 
     // type 1
     EtherTypeAssertion(isAddress, address1, ()=> { throw new Error("is not address.");} )
