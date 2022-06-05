@@ -2,12 +2,17 @@
   "name": "ether-typechecker",
   "version": "0.0.1",
   "description": "Simple ethereum type checker in Typescript.",
-  "main": "index.js",
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dbadoy/ether-typechecker.git"
   },
+  "files": [
+    "dist"
+  ],
   "author": "dbadoy",
   "license": "MIT",
   "bugs": {
