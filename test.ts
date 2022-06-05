@@ -1,5 +1,6 @@
 import {
     EtherTypeAssertion,
+    ThrowError,
     isAddress,
     isBlockHash,
     isPrivateKey,
@@ -69,7 +70,7 @@ function isPublicKey_Test() {
     // TODO
     let testset = [
         {value: "0x04e68acfc0253a620dff706b0a1b1f1f5833ea3beb3bde2250d5f271f3563606672ebc45e0b7ea2e816ecb70ca03137b1c9476eec63d4632e990020b7b6fba39", expect: true},
-    ]
+    ];
 
     for (const elem of testset) {
         if(elem.expect != isPublicKey(elem.value)) {
@@ -86,9 +87,18 @@ function typeAssertion_Test() {
     EtherTypeAssertion(isAddress, address1, ()=> { throw new Error("is not address.");} )
 
     // type 2
+    // define post function after assertion failed case.
     let postFunc1 = () => { console.log('is not address.'); }
     EtherTypeAssertion(isAddress, address1, postFunc1);
 
     let postFunc2 = () => { throw new Error("is not address."); }
     EtherTypeAssertion(isAddress, address2, postFunc2);
+
+    // type3
+    // throw errors with third parameter.
+    EtherTypeAssertion(isAddress, address2, "is not address.");
+
+    // type4
+    // use imported ThrowError. it's throw errors with parameter.
+    EtherTypeAssertion(isAddress, address2, ThrowError("is not address."));
 }
