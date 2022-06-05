@@ -7,15 +7,11 @@ interface postFuncion {
     (): void;
 }
 
-export const ThrowError = (mesg: string) => {
-    throw new Error(mesg);
-}
-
 export function EtherTypeAssertion(typc: typeChecker, value: string, postFnOrErrorMesg: postFuncion | string) {
     if (!typc(value)) {
         if (postFnOrErrorMesg === 'string') {
             let errorMesg: string = postFnOrErrorMesg;
-            ThrowError(errorMesg);
+            throw new Error(errorMesg);
         } else {
             let postFn: any = postFnOrErrorMesg;
             postFn();
